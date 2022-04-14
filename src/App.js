@@ -11,12 +11,11 @@ function App() {
   const [convo, setConvo] = useState([]);
   const [isListening, setIsListeningStatus] = useState(true);
 
-  recognition.onspeechstart = () => {
-    setIsListeningStatus(true);
-  };
+  recognition.onstart = () => setIsListeningStatus(true);
 
-  recognition.onspeechend = () => {
+  recognition.onend = () => {
     setIsListeningStatus(false);
+    recognition.stop();
     setTimeout(() => {
       recognition.start();
     }, 1000);
